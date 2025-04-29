@@ -1,6 +1,8 @@
 package com.exam.swapi.client;
 
 import com.exam.swapi.config.SwapiProperties;
+import com.exam.swapi.model.people.PeoplePageResponseDTO;
+import com.exam.swapi.model.people.PersonDetailDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,20 +18,20 @@ public class SwapiClientImpl implements ISwapiClient{
     }
 
     @Override
-    public String getPeople(int page) {
+    public PeoplePageResponseDTO getPeople(int page) {
         String url = swapiProperties.getBaseUrl() + "/people?page=" + page;
-        return restTemplate.getForObject(url, String.class);
+        return restTemplate.getForObject(url, PeoplePageResponseDTO.class);
     }
 
     @Override
-    public String getPersonById(String id) {
+    public PersonDetailDTO getPersonById(String id) {
         String url = swapiProperties.getBaseUrl() + "/people/" + id;
-        return restTemplate.getForObject(url, String.class);
+        return restTemplate.getForObject(url, PersonDetailDTO.class);
     }
 
     @Override
-    public String getPersonByName(String name) {
+    public PeoplePageResponseDTO getPersonByName(String name) {
         String url = swapiProperties.getBaseUrl() + "/people?name=" + name;
-        return restTemplate.getForObject(url, String.class);
+        return restTemplate.getForObject(url, PeoplePageResponseDTO.class);
     }
 }

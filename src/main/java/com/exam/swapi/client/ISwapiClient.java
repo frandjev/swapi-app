@@ -1,9 +1,12 @@
 package com.exam.swapi.client;
 
+import com.exam.swapi.model.people.PeoplePageResponseDTO;
+import com.exam.swapi.model.people.PersonDetailDTO;
+
 public interface ISwapiClient {
-    String getPeople(int page);
+    PeoplePageResponseDTO getPeople(int page);
 
-    String getPersonById(String id);
+    PersonDetailDTO getPersonById(String id);
 
-    String getPersonByName(String name);
+    PeoplePageResponseDTO getPersonByName(String name);
 }
