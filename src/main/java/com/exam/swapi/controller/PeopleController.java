@@ -3,6 +3,7 @@ package com.exam.swapi.controller;
 import com.exam.swapi.model.people.PeoplePageResponseDTO;
 import com.exam.swapi.model.people.PersonDetailDTO;
 import com.exam.swapi.service.people.IPeopleService;
+import com.exam.swapi.utils.ValidationUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,22 +23,19 @@ public class PeopleController {
 
     @GetMapping
     public ResponseEntity<PeoplePageResponseDTO> listPeople(@RequestParam(defaultValue = "1") int page) {
-        if (page <= 0) {
-            return ResponseEntity.badRequest().build();
-        }
-        PeoplePageResponseDTO response = peopleService.listPeople(page);
-        return ResponseEntity.ok(response);
+        ValidationUtils.requirePositive(page, "page");
+        return ResponseEntity.ok(peopleService.listPeople(page));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PersonDetailDTO> getPersonById(@PathVariable String id) {
-        PersonDetailDTO response = peopleService.findPersonById(id);
-        return ResponseEntity.ok(response);
+        ValidationUtils.requireNotEmpty(id, "id");
+        return ResponseEntity.ok(peopleService.findPersonById(id));
     }
 
     @GetMapping("/search")
     public ResponseEntity<PeoplePageResponseDTO> getPeopleByName(@RequestParam String name) {
-        PeoplePageResponseDTO response = peopleService.findPersonByName(name);
-        return ResponseEntity.ok(response);
+        ValidationUtils.requireNotEmpty(name, "name");
+        return ResponseEntity.ok(peopleService.findPersonByName(name));
     }
 }
