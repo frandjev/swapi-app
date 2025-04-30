@@ -7,6 +7,8 @@ import com.exam.swapi.model.film.FilmPageResponseDTO;
 import com.exam.swapi.model.people.PeoplePageResponseDTO;
 import com.exam.swapi.model.people.PeopleSearchResponseDTO;
 import com.exam.swapi.model.people.PersonDetailDTO;
+import com.exam.swapi.model.starship.StarshipDetailDTO;
+import com.exam.swapi.model.starship.StarshipPageResponseDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -63,6 +65,23 @@ public class SwapiClientImpl implements ISwapiClient {
             return restTemplate.getForObject(url, FilmDetailDTO.class);
         } catch (HttpClientErrorException.NotFound ex) {
             throw new NotFoundException("No se encontró una película con ID " + id);
+        }
+    }
+
+    // ---------- Starships ---------- //
+    @Override
+    public StarshipPageResponseDTO getStarships() {
+        String url = swapiProperties.getBaseUrl() + "/starships";
+        return restTemplate.getForObject(url, StarshipPageResponseDTO.class);
+    }
+
+    @Override
+    public StarshipDetailDTO getStarshipById(String id) {
+        String url = swapiProperties.getBaseUrl() + "/starships/" + id;
+        try {
+            return restTemplate.getForObject(url, StarshipDetailDTO.class);
+        } catch (HttpClientErrorException.NotFound ex) {
+            throw new NotFoundException("No se encontró una nave con ID " + id);
         }
     }
 }

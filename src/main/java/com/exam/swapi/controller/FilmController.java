@@ -22,8 +22,7 @@ public class FilmController {
 
     @GetMapping
     public ResponseEntity<FilmPageResponseDTO> listFilms() {
-        FilmPageResponseDTO response = filmService.listFilms();
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(filmService.listFilms());
     }
 
     @GetMapping("/{id}")
