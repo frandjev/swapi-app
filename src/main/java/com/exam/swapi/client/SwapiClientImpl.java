@@ -9,6 +9,8 @@ import com.exam.swapi.model.people.PeopleSearchResponseDTO;
 import com.exam.swapi.model.people.PersonDetailDTO;
 import com.exam.swapi.model.starship.StarshipDetailDTO;
 import com.exam.swapi.model.starship.StarshipPageResponseDTO;
+import com.exam.swapi.model.vehicle.VehicleDetailDTO;
+import com.exam.swapi.model.vehicle.VehiclePageResponseDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -82,6 +84,23 @@ public class SwapiClientImpl implements ISwapiClient {
             return restTemplate.getForObject(url, StarshipDetailDTO.class);
         } catch (HttpClientErrorException.NotFound ex) {
             throw new NotFoundException("No se encontró una nave con ID " + id);
+        }
+    }
+
+    // ---------- Vehicles ---------- //
+    @Override
+    public VehiclePageResponseDTO getVehicles() {
+        String url = swapiProperties.getBaseUrl() + "/vehicles";
+        return restTemplate.getForObject(url, VehiclePageResponseDTO.class);
+    }
+
+    @Override
+    public VehicleDetailDTO getVehicleById(String id) {
+        String url = swapiProperties.getBaseUrl() + "/vehicles/" + id;
+        try {
+            return restTemplate.getForObject(url, VehicleDetailDTO.class);
+        } catch (HttpClientErrorException.NotFound ex) {
+            throw new NotFoundException("No se encontró un vehículo con ID " + id);
         }
     }
 }
