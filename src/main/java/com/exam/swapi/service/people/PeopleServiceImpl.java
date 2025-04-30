@@ -3,6 +3,7 @@ package com.exam.swapi.service.people;
 import com.exam.swapi.client.ISwapiClient;
 import com.exam.swapi.exception.NotFoundException;
 import com.exam.swapi.model.people.PeoplePageResponseDTO;
+import com.exam.swapi.model.people.PeopleSearchResponseDTO;
 import com.exam.swapi.model.people.PersonDetailDTO;
 import com.exam.swapi.service.people.IPeopleService;
 import com.exam.swapi.utils.ValidationUtils;
@@ -34,11 +35,12 @@ public class PeopleServiceImpl implements IPeopleService {
     }
 
     @Override
-    public PeoplePageResponseDTO findPersonByName(String name) {
+    public PeopleSearchResponseDTO findPersonByName(String name) {
         ValidationUtils.requireNotEmpty(name, "name");
+        String validParam = ValidationUtils.sanitizeParam(name);
 
-        PeoplePageResponseDTO response = swapiClient.getPersonByName(name);
-        if (response == null || response.getResults() == null || response.getResults().isEmpty()) {
+        PeopleSearchResponseDTO response = swapiClient.getPersonByName(validParam);
+        if (response == null || response.getResult() == null || response.getResult().isEmpty()) {
             throw new NotFoundException("No se encontraron personas con nombre: " + name);
         }
         return response;

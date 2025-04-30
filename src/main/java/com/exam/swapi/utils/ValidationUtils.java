@@ -25,4 +25,8 @@ public class ValidationUtils {
             throw new BadRequestException(String.format(FIELD_NOT_EMPTY, fieldName));
         }
     }
+
+    public static String sanitizeParam(String value) {
+        return value == null ? null : value.trim();
+    }
 }

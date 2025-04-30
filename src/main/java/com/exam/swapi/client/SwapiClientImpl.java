@@ -2,6 +2,7 @@ package com.exam.swapi.client;
 
 import com.exam.swapi.config.SwapiProperties;
 import com.exam.swapi.model.people.PeoplePageResponseDTO;
+import com.exam.swapi.model.people.PeopleSearchResponseDTO;
 import com.exam.swapi.model.people.PersonDetailDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -30,8 +31,8 @@ public class SwapiClientImpl implements ISwapiClient{
     }
 
     @Override
-    public PeoplePageResponseDTO getPersonByName(String name) {
+    public PeopleSearchResponseDTO getPersonByName(String name) {
         String url = swapiProperties.getBaseUrl() + "/people?name=" + name;
-        return restTemplate.getForObject(url, PeoplePageResponseDTO.class);
+        return restTemplate.getForObject(url, PeopleSearchResponseDTO.class);
     }
 }

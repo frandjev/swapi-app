@@ -1,6 +1,7 @@
 package com.exam.swapi.controller;
 
 import com.exam.swapi.model.people.PeoplePageResponseDTO;
+import com.exam.swapi.model.people.PeopleSearchResponseDTO;
 import com.exam.swapi.model.people.PersonDetailDTO;
 import com.exam.swapi.service.people.IPeopleService;
 import com.exam.swapi.utils.ValidationUtils;
@@ -34,7 +35,7 @@ public class PeopleController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<PeoplePageResponseDTO> getPeopleByName(@RequestParam String name) {
+    public ResponseEntity<PeopleSearchResponseDTO> getPeopleByName(@RequestParam String name) {
         ValidationUtils.requireNotEmpty(name, "name");
         return ResponseEntity.ok(peopleService.findPersonByName(name));
     }
