@@ -1,11 +1,13 @@
 package com.exam.swapi.model.people;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Getter
 @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PersonDetailDTO {
 
     @JsonProperty("message")
