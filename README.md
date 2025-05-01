@@ -40,6 +40,13 @@ git clone https://github.com/usuario/swapi-app.git
 cd swapi-app
 
 ```
+
+## 🔐 Seguridad
+Esta API está protegida con autenticación HTTP Basic.
+
+- Usuario: admin
+
+- Contraseña: admin123
 ## 📘 Documentación Swagger
 Una vez levantada la app, accedé a la documentación interactiva en:
 - 🔗 http://localhost:8080/swagger-ui/index.html
