@@ -5,7 +5,6 @@ import com.exam.swapi.exception.NotFoundException;
 import com.exam.swapi.model.people.PeoplePageResponseDTO;
 import com.exam.swapi.model.people.PeopleSearchResponseDTO;
 import com.exam.swapi.model.people.PersonDetailDTO;
-import com.exam.swapi.service.people.IPeopleService;
 import com.exam.swapi.utils.ValidationUtils;
 import org.springframework.stereotype.Service;
 
